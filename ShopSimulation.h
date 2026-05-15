@@ -51,4 +51,5 @@ private:
     void scenarioDelegation();
     void scenarioState();
     void scenarioObserver();
+    void scenarioMemento();
 };

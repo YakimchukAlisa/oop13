@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="AccessController.cpp" />
     <ClCompile Include="AutoDoor.cpp" />
+    <ClCompile Include="CartMemento.cpp" />
     <ClCompile Include="CheckoutTerminal.cpp" />
     <ClCompile Include="Customer.cpp" />
     <ClCompile Include="HighPrecisionScale.cpp" />
@@ -144,8 +145,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccessController.h" />
+    <ClInclude Include="AdminPanel.h" />
     <ClInclude Include="AutoDoor.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CartMemento.h" />
     <ClInclude Include="CheckoutScale.h" />
     <ClInclude Include="CheckoutTerminal.h" />
     <ClInclude Include="Customer.h" />

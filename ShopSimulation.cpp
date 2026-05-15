@@ -74,6 +74,7 @@ void ShopSimulation::runSimulation() {
   //  scenarioDelegation();
     scenarioState();
     scenarioObserver();
+    scenarioMemento();
 }
 
 void ShopSimulation::scenarioProxy() {
@@ -182,17 +183,45 @@ void ShopSimulation::scenarioObserver() {
     std::cout << "\n\n--- ПАТТЕРН OBSERVER (Умная полка) ---\n";
 
     auto inventorySystem = std::make_shared<InventorySystem>();  // автоматический учёт
-auto adminPanel = std::make_shared<AdminPanel>(true);        // для человека с звуком
+    auto adminPanel = std::make_shared<AdminPanel>(true);        // для человека с звуком
 
-SmartShelf milkShelf(1, "Молоко", 5000.0, 0.2);
-milkShelf.attach(inventorySystem);
-milkShelf.attach(adminPanel);
+    SmartShelf milkShelf(1, "Молоко", 5000.0, 0.2);
+    milkShelf.attach(inventorySystem);
+    milkShelf.attach(adminPanel);
 
-milkShelf.displayInfo();
-milkShelf.simulatePurchase(3500);  // вес 1500г (30%)
-milkShelf.simulatePurchase(1000);  // вес 500г (10%) - срабатывает порог
+    milkShelf.displayInfo();
+    milkShelf.simulatePurchase(3500);  // вес 1500г (30%)
+    milkShelf.simulatePurchase(1000);  // вес 500г (10%) - срабатывает порог
 
-std::cout << "\n--- Результаты ---\n";
-inventorySystem->showAutoOrders();
-adminPanel->showNotifications();
+    std::cout << "\n--- Результаты ---\n";
+    inventorySystem->showAutoOrders();
+    adminPanel->showNotifications();
+};
+
+void ShopSimulation::scenarioMemento() {
+    std::cout << "\n\n--- ПАТТЕРН MEMENTO (Корзина с отменой) ---\n";
+
+    // Создаем товары
+    auto milk = std::make_shared<RegularProduct>("Молоко", 85.0, 1000);
+    auto bread = std::make_shared<RegularProduct>("Хлеб", 45.0, 400);
+    auto chocolate = std::make_shared<RegularProduct>("Шоколад", 120.0, 90);
+
+    auto cart = std::make_shared<ShoppingCart>(1001, 1);
+
+    cart->addItem(milk);      // автоматически сохраняет состояние
+    cart->addItem(bread);     // сохраняет
+    cart->addItem(chocolate); // сохраняет
+    cart->displayCart();
+
+    cart->undo();  // убираем шоколад
+    cart->displayCart();
+
+    cart->undo();  // убираем хлеб
+    cart->displayCart();
+
+    cart->undo();  // убираем молоко
+    cart->displayCart();
+
+    cart->undo();  // ничего не убирает
+    cart->displayCart();
 }
