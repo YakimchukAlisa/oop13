@@ -138,6 +138,7 @@
     <ClCompile Include="Product.cpp" />
     <ClCompile Include="ShoppingCart.cpp" />
     <ClCompile Include="ShopSimulation.cpp" />
+    <ClCompile Include="SmartShelf.cpp" />
     <ClCompile Include="Turnstile.cpp" />
     <ClCompile Include="ооп4.cpp" />
   </ItemGroup>
@@ -152,6 +153,7 @@
     <ClInclude Include="IExitDevice.h" />
     <ClInclude Include="InventoryRobot.h" />
     <ClInclude Include="InventorySystem.h" />
+    <ClInclude Include="IShelfObserver.h" />
     <ClInclude Include="MotionSensor.h" />
     <ClInclude Include="PaymentSystem.h" />
     <ClInclude Include="PostalScale.h" />

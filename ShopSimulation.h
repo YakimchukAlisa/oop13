@@ -12,6 +12,9 @@
 #include "PostalScale.h"
 #include "AutoDoor.h"
 #include "CheckoutTerminal.h"
+#include "SmartShelf.h"
+#include "InventorySystem.h"
+#include "AdminPanel.h"
 
 class ShopSimulation {
 private:
@@ -47,4 +50,5 @@ private:
     void scenarioProxy();
     void scenarioDelegation();
     void scenarioState();
+    void scenarioObserver();
 };

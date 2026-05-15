@@ -73,6 +73,7 @@ void ShopSimulation::runSimulation() {
   //  std::this_thread::sleep_for(std::chrono::seconds(1));
   //  scenarioDelegation();
     scenarioState();
+    scenarioObserver();
 }
 
 void ShopSimulation::scenarioProxy() {
@@ -160,19 +161,38 @@ void ShopSimulation::scenarioDelegation() {
     std::cout << "   Итоговая цена: " << final2 << " руб.\n\n";
 };
 
-    void ShopSimulation::scenarioState() {
-        std::cout << "\n--- ПАТТЕРН STATE (Кассовый терминал) ---\n";
-        CheckoutTerminal terminal;
+void ShopSimulation::scenarioState() {
+    std::cout << "\n--- ПАТТЕРН STATE (Кассовый терминал) ---\n";
+    CheckoutTerminal terminal;
 
-        terminal.showStatus();
-        terminal.scanProduct("Молоко", 85.0);
-        terminal.scanProduct("Хлеб", 45.0);
-        terminal.removeLastProduct();  // удаляем хлеб
-        terminal.scanProduct("Шоколад", 120.0);
-        terminal.showStatus();
-        terminal.proceedToPayment();
-        terminal.cancel();  // отмена оплаты
-        terminal.proceedToPayment();
-        terminal.completePayment();
-        terminal.showStatus();
-    }
+    terminal.showStatus();
+    terminal.scanProduct("Молоко", 85.0);
+    terminal.scanProduct("Хлеб", 45.0);
+    terminal.removeLastProduct();  // удаляем хлеб
+    terminal.scanProduct("Шоколад", 120.0);
+    terminal.showStatus();
+    terminal.proceedToPayment();
+    terminal.cancel();  // отмена оплаты
+    terminal.proceedToPayment();
+    terminal.completePayment();
+    terminal.showStatus();
+};
+
+void ShopSimulation::scenarioObserver() {
+    std::cout << "\n\n--- ПАТТЕРН OBSERVER (Умная полка) ---\n";
+
+    auto inventorySystem = std::make_shared<InventorySystem>();  // автоматический учёт
+auto adminPanel = std::make_shared<AdminPanel>(true);        // для человека с звуком
+
+SmartShelf milkShelf(1, "Молоко", 5000.0, 0.2);
+milkShelf.attach(inventorySystem);
+milkShelf.attach(adminPanel);
+
+milkShelf.displayInfo();
+milkShelf.simulatePurchase(3500);  // вес 1500г (30%)
+milkShelf.simulatePurchase(1000);  // вес 500г (10%) - срабатывает порог
+
+std::cout << "\n--- Результаты ---\n";
+inventorySystem->showAutoOrders();
+adminPanel->showNotifications();
+}
