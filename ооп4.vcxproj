@@ -128,11 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AccessController.cpp" />
+    <ClCompile Include="AdminPanel.cpp" />
     <ClCompile Include="AutoDoor.cpp" />
     <ClCompile Include="CartMemento.cpp" />
     <ClCompile Include="CheckoutTerminal.cpp" />
     <ClCompile Include="Customer.cpp" />
     <ClCompile Include="HighPrecisionScale.cpp" />
+    <ClCompile Include="InventorySystem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PaymentSystem.cpp" />
     <ClCompile Include="PostalScale.cpp" />
